@@ -212,7 +212,7 @@ V4l2Device::close ()
 }
 
 int
-V4l2Device::io_control (int cmd, void *arg)
+V4l2Device::io_control (unsigned int cmd, void *arg)
 
 {
     if (_fd < 0)
