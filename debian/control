@@ -1,0 +1,13 @@
+Source: rkisp-engine
+Section: admin
+Priority: optional
+Maintainer: djkabutar <d.kabutarwala@yahoo.com>
+Build-Depends: debhelper (>= 7.0.50~)
+Vcs-Git: https://github.com/vicharak-in/rockchip-linux-camera_engine_rkisp.git
+
+Package: rkisp-engine
+Architecture: arm64
+Priority: optional
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: RKISP for image processing on RK3399
+ This package provides the image server which will be run in background and apply changes to the raw images captured from camera if iqfile of the device is available in /etc/iqfiles.

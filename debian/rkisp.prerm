@@ -1,0 +1,7 @@
+#!/bin/env bash
+
+set -e
+
+systemctl stop rkisp_3A.service && systemctl disable rkisp_3A.service
+
+exit 0

@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/architecture.mk
+include /usr/share/dpkg/pkg-info.mk
+
+build:
+	$(MAKE) CROSS_COMPILE=aarch64-linux-gnu- all
+
+binary:
+	@mkdir -m 755 -p debian/rkisp-engine/usr/bin
+	@mkdir -m 755 -p debian/rkisp-engine/usr/lib/ae
+	@mkdir -m 755 -p debian/rkisp-engine/usr/lib/af
+	@mkdir -m 755 -p debian/rkisp-engine/usr/lib/awb
+	@mkdir -m 755 -p debian/rkisp-engine/lib/systemd/system
+	@mkdir -m 755 -p debian/rkisp-engine/etc/init.d
+	@mkdir -m 755 -p debian/rkisp-engine/etc/iqfiles
+	@mkdir -m 755 -p debian/rkisp-engine/lib/systemd/system
+	@mkdir -m 755 -p debian/rkisp-engine/DEBIAN
+	@cp build/bin/rkisp_3A_server debian/rkisp-engine/usr/bin
+	@cp build/bin/rkisp_demo debian/rkisp-engine/usr/bin
+	@cp build/lib/librkisp.so debian/rkisp-engine/usr/lib
+	@cp build/lib/librkisp_api.so debian/rkisp-engine/usr/lib
+	@cp plugins/3a/rkiq/aec/lib64/librkisp_aec.so debian/rkisp-engine/usr/lib/ae
+	@cp plugins/3a/rkiq/af/lib64/librkisp_af.so debian/rkisp-engine/usr/lib/af
+	@cp plugins/3a/rkiq/awb/lib64/librkisp_awb.so debian/rkisp-engine/usr/lib/awb
+	@cp rkisp/rkisp_3A.service debian/rkisp-engine/lib/systemd/system/
+	@cp iqfiles/* debian/rkisp-engine/etc/iqfiles
+	@install -m 755 rkisp/rkisp_3A.sh debian/rkisp-engine/etc/init.d
+	@install -m 755 debian/rkisp.postinst debian/rkisp-engine/DEBIAN/postinst
+	@install -m 755 debian/rkisp.prerm debian/rkisp-engine/DEBIAN/prerm
+	dh_gencontrol
+	dh_builddeb
+
+clean:
+	@rm -rf debian/rkisp-engine

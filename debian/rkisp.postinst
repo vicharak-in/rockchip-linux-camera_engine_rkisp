@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+set -e
+
+systemctl daemon-reload
+systemctl stop rkisp_3A.service && systemctl disable rkisp_3A.service
+systemctl enable rkisp_3A.service
+systemctl start rkisp_3A.service
+
+exit 0
