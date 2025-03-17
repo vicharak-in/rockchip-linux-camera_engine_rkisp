@@ -29,7 +29,7 @@ binary:
 	@install -m 755 debian/rkisp.postinst debian/rkisp-engine/DEBIAN/postinst
 	@install -m 755 debian/rkisp.prerm debian/rkisp-engine/DEBIAN/prerm
 	dh_gencontrol
-	dh_builddeb
+	dh_builddeb -- -Zxz
 
 clean:
 	@rm -rf debian/rkisp-engine
